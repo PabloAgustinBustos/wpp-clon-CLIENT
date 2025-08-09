@@ -33,12 +33,11 @@ export const AuthProvider: React.FC<IProps> = ({ children }) => {
   useEffect(() => {
     const fetchAuthUser = async () => {
       try {
+        // Está configurado en vite.config.ts que a cada llamada que empiece por /api lo intercepte y le conecte el host
         const res = await fetch("/api/auth/me")
         const data = await res.json()
 
         if (!res.ok) throw new Error(data.message)
-        
-        console.log(data)
 
         setAuthUser(data.user)
       } catch (e) {
