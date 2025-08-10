@@ -1,11 +1,22 @@
-const Message = ({ message }: { message?: any }) => {
-	const fromMe = message.fromMe;
+import { useAuthContext } from "../../context/AuthContext";
+import useConversation, { type MessageType } from "../../zustand/useConversation";
+
+const Message = ({ message }: { message: MessageType }) => {
+	const { authUser } = useAuthContext()
+	const { selectedConversation } = useConversation()
+
+	const fromMe = message?.senderId == authUser?.id;
+
+	console.log({sender: message.senderId, me: authUser, message})
+
 	const chatClass = fromMe ? "chat-end" : "chat-start";
+	
 	const img = fromMe
-		? "https://avatar.iran.liara.run/public/boy?username=johndoe"
-		: "https://avatar.iran.liara.run/public/boy?username=janedoe";
+		? authUser?.profilePicture
+		: selectedConversation?.profilePicture;
 
 	const bubbleBg = fromMe ? "bg-blue-500" : "";
+	
 	return (
 		<div className={`chat ${chatClass}`}>
 			<div className='hidden md:block chat-image avatar'>

@@ -6,19 +6,19 @@ export type Conversation = {
   profilePicture: string
 }
 
-type Message = {
+export type MessageType = {
   id: string
   body: string
-  senderID: string
+  senderId: string
   
 }
 
 type ConversationState = {
   selectedConversation: null | Conversation
-  messages: Message[],
+  messages: MessageType[],
 
   setSelectedConversation: (conversation: Conversation | null) => void,
-  setMessages: (messages: Message[]) => void
+  setMessages: (messages: MessageType[]) => void
 }
 
 const useConversation = create<ConversationState>(set => ({
