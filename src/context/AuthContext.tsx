@@ -27,6 +27,7 @@ export const useAuthContext = () => {
 }
 
 export const AuthProvider: React.FC<IProps> = ({ children }) => {
+  console.log("AuthProvider")
   const [authUser, setAuthUser] = useState<AuthUser | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
@@ -39,6 +40,7 @@ export const AuthProvider: React.FC<IProps> = ({ children }) => {
 
         if (!res.ok) throw new Error(data.message)
 
+          console.log("autenticado")
         setAuthUser(data.user)
       } catch (e) {
         console.error(e)
